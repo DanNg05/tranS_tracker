@@ -5,13 +5,14 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+# config/initializers/cors.rb
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3001"
+    origins 'http://localhost:3001'  # Replace with the URL of your React app
 
-    resource "api/v1/*",
+    resource '*',
       headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      expose: %w(Authorization)
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end

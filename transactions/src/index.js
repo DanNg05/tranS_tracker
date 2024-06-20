@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Cards from './components/Cards';
+import Card from './components/Card';
 // import App from '../src/components/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,6 +15,7 @@ root.render(
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/cards" element={<Cards />}/>
+      <Route path="/cards/:id" element={<Card />}/>
     </Routes>
     </Router>
   // <Cards />
