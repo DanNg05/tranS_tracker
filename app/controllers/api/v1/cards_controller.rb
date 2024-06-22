@@ -16,7 +16,7 @@ class Api::V1::CardsController < ApplicationController
     @card = Card.new(card_params)
 
     if @card.save
-      render json: @card, status: :created, location: @card
+      render json: @card, status: :created
     else
       render json: @card.errors, status: :unprocessable_entity
     end
@@ -33,12 +33,13 @@ class Api::V1::CardsController < ApplicationController
 
   #delete card
   def destroy
+    @card = Card.find(params[:id])
     @card.destroy
   end
 
   private
 
   def card_params
-    params.permit(:card).require(:category, :date, :amount, :description)
+    params.require(:card).permit(:category, :date, :amount, :description)
   end
 end

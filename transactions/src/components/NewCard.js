@@ -6,6 +6,7 @@ import '../Styling/Styling.css'
 
 
 const NewCard = () => {
+    // SET UP CARD WITH EMPTY VALUES
     const [card, setCard] = useState({
         category: '',
         amount: '',
@@ -13,6 +14,7 @@ const NewCard = () => {
         date: ''
     });
 
+    // USED TO NAVIGATE BETWEEN PAGES
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -24,6 +26,7 @@ const NewCard = () => {
         }));
     };
 
+    // POST ACTION WITH AXIOS
     const handleSubmit = async (event) => {
         event.preventDefault();
 

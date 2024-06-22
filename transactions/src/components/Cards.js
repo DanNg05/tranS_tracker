@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import {Link} from 'react-router-dom';
 import Footer from './Footer'
 import '../Styling/Styling.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const API_URL = "http://localhost:3000/api/v1/cards";
 
@@ -71,6 +71,27 @@ const Cards = () => {
     }
   };
 
+  // FUNCTION TO RETURN ICONS
+  const returnIcon = (category) => {
+    switch (category) {
+      case 'shopping':
+        return <i class="fa-solid fa-bag-shopping"></i>;
+      case 'transportation':
+        return <i class="fa-solid fa-car"></i>;
+      case 'groceries':
+        return <i class="fa-solid fa-drumstick-bite"></i>;
+      case 'utilities':
+        return <i class="fa-solid fa-bolt"></i>;
+      case 'health':
+        return <i class="fa-solid fa-heart-pulse"></i>;
+      case 'entertainment':
+        return <i class="fa-solid fa-gamepad"></i>;
+      default:
+        return <i class="fa-regular fa-circle"></i>;
+    }
+  };
+
+  // CHECK FOR ERROR AND THE AVAILABILITY OF DATA
   if (error) {
     return <div>{error}</div>;
   }
@@ -81,15 +102,19 @@ const Cards = () => {
   return (
 
       <div>
-        <h2>Card List</h2>
+        <div className="d-flex justify-content-center">
+          <h2>Your transactions</h2>
+        </div>
         {Object.keys(cards).map(date => (
-          <div key={date}>
-            { isToday(new Date(date)) ? <strong>{format(date, 'EEE dd MMM yyyy')} Today</strong> : <strong>{format(date, 'EEE dd MMM yyyy')} {getDifferenceInDays(today, new Date(date))} days ago</strong>  }
+          <div key={date} className='cards-card-info-with-date'>
+            { isToday(new Date(date)) ? <strong>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
             {cards[date].map(card => (
-              <div key={card.id}>
-                <p>Category: {card.category}</p>
-                <Link to={`/cards/${card.id}`}>Amount: {card.amount} AUD</Link>
-                <p>Description: {card.description} </p>
+              <div key={card.id} className={`cards-card-info-without-date` + {handleBackground}}>
+                <div className='d-flex'>
+                <p className='no-mb'>{returnIcon(card.category)}</p>
+                <p className='no-mb cards-card-description'>{card.description} </p>
+                </div>
+                <Link className='no-underline' to={`/cards/${card.id}`}>{card.amount} AUD</Link>
               </div>
             ))}
           </div>

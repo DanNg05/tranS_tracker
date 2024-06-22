@@ -27,6 +27,7 @@ const Card = () => {
       });
   }, [id]);
 
+  // FUNCTION TO HANDLE DELETE ACTION OF CARD
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:3000/api/v1/cards/${id}`);
@@ -37,6 +38,8 @@ const Card = () => {
     }
   }
 
+
+  // CHECK FOR ERROR AND THE AVAILABILITY OF DATA
   if (error) {
     return <div>{error}</div>;
   }
