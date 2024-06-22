@@ -90,7 +90,13 @@ const Cards = () => {
         return <i class="fa-regular fa-circle"></i>;
     }
   };
-
+  // PUT DIFFERENCE BACKGROUND COLOR OF DIV
+  const handleBackground = (index) => {
+    if (index % 2 === 0) {
+      return `grey-bg`
+    }
+      return `darker-bg`
+  }
   // CHECK FOR ERROR AND THE AVAILABILITY OF DATA
   if (error) {
     return <div>{error}</div>;
@@ -108,10 +114,10 @@ const Cards = () => {
         {Object.keys(cards).map(date => (
           <div key={date} className='cards-card-info-with-date'>
             { isToday(new Date(date)) ? <strong>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
-            {cards[date].map(card => (
-              <div key={card.id} className={`cards-card-info-without-date` + {handleBackground}}>
+            {cards[date].map((card, index) => (
+              <div key={card.id} className={`${handleBackground(index)} cards-card-info-without-date`}>
                 <div className='d-flex'>
-                <p className='no-mb'>{returnIcon(card.category)}</p>
+                <p className='no-mb icons-left'>{returnIcon(card.category)}</p>
                 <p className='no-mb cards-card-description'>{card.description} </p>
                 </div>
                 <Link className='no-underline' to={`/cards/${card.id}`}>{card.amount} AUD</Link>

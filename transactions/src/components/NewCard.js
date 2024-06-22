@@ -51,15 +51,19 @@ const NewCard = () => {
 
     return (
       <>
-        <div>
-          <form onSubmit={handleSubmit}>
-              <div>
-                  <label>Category:</label>
+        <div className='mt-5'>
+          <div className="d-flex justify-content-center">
+            <h1>NEW TRANSACTION HERE</h1>
+          </div>
+          <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center'>
+              <div className='d-flex justify-content-between align-items-center form-div'>
+                  <label className='form-label'>Category:</label>
                   <select
                       name="category"
                       value={card.category}
                       onChange={handleChange}
                       required
+                      className='form-input'
                   >
                   <option value="">Select a category</option>
                   <option value="shopping">Shopping</option>
@@ -71,37 +75,40 @@ const NewCard = () => {
                   <option value="others">Others</option>
                   </select>
               </div>
-              <div>
-                  <label>Amount:</label>
+              <div className='d-flex justify-content-between align-items-center form-div'>
+                  <label className='form-label'>Amount:</label>
                   <input
                       type="number"
                       name="amount"
                       value={card.amount}
                       onChange={handleChange}
                       required
+                      className='form-input'
                   />
               </div>
-              <div>
-                  <label>Description:</label>
+              <div className='d-flex justify-content-between align-items-center form-div'>
+                  <label className='form-label'>Description:</label>
                   <input
                       type="text"
                       name="description"
                       value={card.description}
                       onChange={handleChange}
                       required
+                      className='form-input'
                   />
               </div>
-              <div>
-                  <label>Date:</label>
+              <div className='d-flex justify-content-between align-items-center form-div'>
+                  <label className='form-label'>Date:</label>
                   <input
                       type="date"
                       name="date"
                       value={card.date}
                       onChange={handleChange}
                       required
+                      className='form-input'
                   />
               </div>
-              <button type="submit">Add Card</button>
+              <button type="submit" className='form-btn'>ADD NEW TRANSACTION</button>
           </form>
         </div>
         <Footer />
