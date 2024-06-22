@@ -1,0 +1,79 @@
+:root {
+  --background-color: bisque;
+  --foreground-color: rgb(238, 175, 97);
+  --color: black;
+  --page-background-color: white;
+  --toggle-bg: #0e0e0a;
+  --toggle-fg: #ffd000;
+  --primary-text-color: #0a0a0a;
+  --secondary-text-color: #ffffff;
+}
+.container {
+  background-color: var(--page-background-color);
+  padding: 0;
+}
+.cards-card-info-with-date {
+  margin-bottom: 20px;
+  /* margin-left: 20px; */
+}
+.cards-card-info-without-date {
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+  padding: 10px 10px;
+  width: 100dvw;
+  margin-top: 5px;
+}
+.middle-cards {
+  align-items: center;
+}
+.cards-card-description {
+  margin-left: 20px;
+}
+
+.icons-left {
+  margin-left: 10px;
+}
+.right-of-date {
+  position: absolute;
+  right: 20px;
+}
+
+.no-underline {
+  text-decoration: none;
+  margin-right: 20px;
+  color: var(--color);
+}
+.grey-bg {
+  background-color: var(--background-color);
+}
+.darker-bg {
+  background-color: var(--foreground-color);
+}
+
+.cards-header {
+  color: var(--color);
+}
+.cards-date{
+  color: var(--color);
+  margin-left: 20px;
+}
+
+.no-mb {
+  margin-bottom: 0;
+  color: var(--color);
+}
+
+[data-theme="dark"] {
+  --page-background-color: rgb(39, 39, 39);
+  --color: rgba(255, 255, 255, 0.623);
+  --background-color: rgb(73, 64, 53);
+  --foreground-color: rgb(78, 44, 3);
+  --primary-text-color: #f6f6f6;
+  --secondary-text-color: #0a0a0a;
+  --toggle-bg: #b0bde0;
+  --toggle-fg: #4a521e;
+}

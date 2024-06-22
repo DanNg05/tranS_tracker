@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import '../Styling/Styling.css'
-
+import '../Styling/newCard.css'
 
 const NewCard = () => {
     // SET UP CARD WITH EMPTY VALUES

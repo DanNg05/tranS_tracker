@@ -1,0 +1,30 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(113, 160, 48, 0.946);
+}
+footer ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100dvw;
+  align-items: center;
+  margin-top: 10px;
+}
+footer a {
+  text-decoration: none;
+}
+.icons-left {
+  margin-left: 10px;
+}
+
+.right-footer {
+  margin-right: 40px;
+}
+
+/* .left-footer {
+  margin-left: 0px;
+} */
+
+.icons-footer {
+  color: rgb(124, 19, 19);
+}

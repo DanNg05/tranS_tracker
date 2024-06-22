@@ -6,6 +6,9 @@ import {Link} from 'react-router-dom';
 import Footer from './Footer'
 import '../Styling/Styling.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Styling/Cards.css';
+import {Toggle} from './Toggle';
+import '../Styling/Toggle.css'
 
 const API_URL = "http://localhost:3000/api/v1/cards";
 
@@ -14,6 +17,7 @@ const Cards = () => {
   const today = new Date();
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
+  const [isDark, setIsDark] = useState(true);
 
   // CALCULATE THE DIFFERENCE IN DAYS
   const getDifferenceInDays = (date1, date2) => {
@@ -106,14 +110,17 @@ const Cards = () => {
     return <div>Loading...</div>;
   }
   return (
-
-      <div>
-        <div className="d-flex justify-content-center">
-          <h2>Your transactions</h2>
+      <div className='container' data-theme={ isDark ? "dark" : ""}>
+        <Toggle
+        isChecked={isDark}
+        handleChange={() => setIsDark(!isDark)}
+        />
+        <div className="d-flex justify-content-center ">
+          <h2 className='cards-header'>Your transactions</h2>
         </div>
         {Object.keys(cards).map(date => (
           <div key={date} className='cards-card-info-with-date'>
-            { isToday(new Date(date)) ? <strong>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
+            { isToday(new Date(date)) ? <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
             {cards[date].map((card, index) => (
               <div key={card.id} className={`${handleBackground(index)} cards-card-info-without-date`}>
                 <div className='d-flex'>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Styling/Styling.css'
-
+import '../Styling/Footer.css'
 
 const Footer = () => {
   return (

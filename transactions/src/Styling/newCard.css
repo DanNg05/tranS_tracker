@@ -1,0 +1,22 @@
+.form-div {
+  width: 100dvw;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  margin-left: 20px;
+}
+.form-input {
+  margin-right: 20px;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.form-btn {
+  padding: 15px;
+  background-color: maroon;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 3px 3px 1px grey;
+  border: 1px solid maroon;
+}

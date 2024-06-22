@@ -1,0 +1,47 @@
+.container {
+  position: relative;
+  padding-top: 60px;
+  transition: background-color 250ms ease-in-out;
+}
+
+.toggle-container {
+  position: absolute;
+  right: 20px;
+  top: -10px;
+}
+
+.toggle {
+  visibility: hidden;
+}
+
+.toggle + label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--primary-text-color);
+}
+
+.toggle + label::before {
+  content:"";
+  height: 15px;
+  width: 30px;
+  border-radius: 10px;
+  background-color: var(--toggle-bg);
+  margin-right: 8px;
+  transition: background-color 250ms ease-in-out;
+}
+
+.toggle + label::after {
+  content: "";
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: var(--toggle-fg);
+  position: absolute;
+  left: 2px;
+  transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
+}
+.toggle:checked + label::after {
+  transform: translateX(100%);
+}
