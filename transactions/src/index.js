@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Cards from './components/Cards';
 import Card from './components/Card';
 // import App from '../src/components/App';
+import NewCard from './components/NewCard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <Route path="/" element={<Home />}/>
       <Route path="/cards" element={<Cards />}/>
       <Route path="/cards/:id" element={<Card />}/>
+      <Route path="/cards/new" element={<NewCard />}/>
     </Routes>
     </Router>
   // <Cards />

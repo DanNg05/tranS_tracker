@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a, li {
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+
+footer {
+  position: fixed;
+  bottom: 20px;
+}
+footer ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100dvw;
+  align-items: center;
+}
+
+.right-footer {
+  margin-right: 20px;
+}
+
+.left-footer {
+  margin-left: 20px;
+}
