@@ -53,7 +53,7 @@ const NewCard = () => {
 
     return (
       <>
-        <div className='container-1' data-theme={isDark ? "dark" : ""}>
+        <div className='container-3' data-theme={isDark ? "dark" : ""}>
           <div className="d-flex justify-content-center">
             <h1 className='cards-header'>NEW TRANSACTION HERE</h1>
           </div>

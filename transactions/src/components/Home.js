@@ -67,7 +67,7 @@ function Home() {
 
   return (
     <>
-      <div className='container-1' data-theme={ DarkMode ? "dark" : ""}>
+      <div className='container-3' data-theme={ DarkMode ? "dark" : ""}>
         <div className="d-flex justify-content-center ">
           <h1 className='cards-header'>Welcome to Tracker</h1>
         </div>
