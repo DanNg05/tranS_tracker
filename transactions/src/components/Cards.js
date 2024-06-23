@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { format } from 'date-fns';
 import {Link} from 'react-router-dom';
 import Footer from './Footer'
@@ -9,15 +9,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styling/Cards.css';
 import {Toggle} from './Toggle';
 import '../Styling/Toggle.css'
+import { DarkModeContext } from '../App';
+
 
 const API_URL = "http://localhost:3000/api/v1/cards";
 
 
 const Cards = () => {
+  const isDark = useContext(DarkModeContext);
   const today = new Date();
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
-  const [isDark, setIsDark] = useState(true);
 
   // CALCULATE THE DIFFERENCE IN DAYS
   const getDifferenceInDays = (date1, date2) => {
@@ -79,19 +81,19 @@ const Cards = () => {
   const returnIcon = (category) => {
     switch (category) {
       case 'shopping':
-        return <i class="fa-solid fa-bag-shopping"></i>;
+        return <i className="fa-solid fa-bag-shopping"></i>;
       case 'transportation':
-        return <i class="fa-solid fa-car"></i>;
+        return <i className="fa-solid fa-car"></i>;
       case 'groceries':
-        return <i class="fa-solid fa-drumstick-bite"></i>;
+        return <i className="fa-solid fa-drumstick-bite"></i>;
       case 'utilities':
-        return <i class="fa-solid fa-bolt"></i>;
+        return <i className="fa-solid fa-bolt"></i>;
       case 'health':
-        return <i class="fa-solid fa-heart-pulse"></i>;
+        return <i className="fa-solid fa-heart-pulse"></i>;
       case 'entertainment':
-        return <i class="fa-solid fa-gamepad"></i>;
+        return <i className="fa-solid fa-gamepad"></i>;
       default:
-        return <i class="fa-regular fa-circle"></i>;
+        return <i className="fa-regular fa-circle"></i>;
     }
   };
   // PUT DIFFERENCE BACKGROUND COLOR OF DIV
@@ -110,11 +112,7 @@ const Cards = () => {
     return <div>Loading...</div>;
   }
   return (
-      <div className='container' data-theme={ isDark ? "dark" : ""}>
-        <Toggle
-        isChecked={isDark}
-        handleChange={() => setIsDark(!isDark)}
-        />
+      <div className='container-1' data-theme={ isDark ? "dark" : ""}>
         <div className="d-flex justify-content-center ">
           <h2 className='cards-header'>Your transactions</h2>
         </div>

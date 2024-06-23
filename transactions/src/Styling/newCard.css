@@ -5,6 +5,7 @@
 
 .form-label {
   margin-left: 20px;
+  color: var(--primary-text-color);
 }
 .form-input {
   margin-right: 20px;

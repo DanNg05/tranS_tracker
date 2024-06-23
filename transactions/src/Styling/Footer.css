@@ -1,6 +1,7 @@
 footer {
   position: fixed;
   bottom: 0;
+  left: 0;
   background-color: rgba(113, 160, 48, 0.946);
 }
 footer ul {
@@ -13,9 +14,9 @@ footer ul {
 footer a {
   text-decoration: none;
 }
-.icons-left {
+/* .icons-left {
   margin-left: 10px;
-}
+} */
 
 .right-footer {
   margin-right: 40px;

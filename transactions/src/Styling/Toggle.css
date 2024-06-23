@@ -1,13 +1,9 @@
-.container {
-  position: relative;
-  padding-top: 60px;
-  transition: background-color 250ms ease-in-out;
-}
 
 .toggle-container {
   position: absolute;
   right: 20px;
   top: -10px;
+  z-index: 1;
 }
 
 .toggle {

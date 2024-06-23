@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import '../Styling/Styling.css'
 import '../Styling/newCard.css'
+import { DarkModeContext } from '../App';
 
 const NewCard = () => {
+    const isDark = useContext(DarkModeContext);
     // SET UP CARD WITH EMPTY VALUES
     const [card, setCard] = useState({
         category: '',
@@ -51,13 +53,13 @@ const NewCard = () => {
 
     return (
       <>
-        <div className='mt-5'>
+        <div className='container-1' data-theme={isDark ? "dark" : ""}>
           <div className="d-flex justify-content-center">
-            <h1>NEW TRANSACTION HERE</h1>
+            <h1 className='cards-header'>NEW TRANSACTION HERE</h1>
           </div>
           <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center'>
               <div className='d-flex justify-content-between align-items-center form-div'>
-                  <label className='form-label'>Category:</label>
+                  <label className='form-label '>Category:</label>
                   <select
                       name="category"
                       value={card.category}

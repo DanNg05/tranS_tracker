@@ -8,13 +8,15 @@
   --primary-text-color: #0a0a0a;
   --secondary-text-color: #ffffff;
 }
-.container {
+.container-1 {
   background-color: var(--page-background-color);
-  padding: 0;
+  height: 100vh;
+  position: relative;
+  padding-top: 40px;
+  transition: background-color 250ms ease-in-out;
 }
 .cards-card-info-with-date {
   margin-bottom: 20px;
-  /* margin-left: 20px; */
 }
 .cards-card-info-without-date {
   margin-bottom: 20px;
@@ -23,7 +25,7 @@
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
-  padding: 10px 10px;
+  padding: 10px;
   width: 100dvw;
   margin-top: 5px;
 }
