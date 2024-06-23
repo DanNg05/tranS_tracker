@@ -7,7 +7,7 @@ import Footer from './Footer'
 import '../Styling/Styling.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styling/Cards.css';
-import {Toggle} from './Toggle';
+// import {Toggle} from './Toggle';
 import '../Styling/Toggle.css'
 import { DarkModeContext } from '../App';
 
