@@ -6,9 +6,11 @@ import {DarkModeContext} from '../App'
 // import '../Styling/Home.css'
 import '../Styling/Cards.css';
 import axios from 'axios';
+// import { Chart as ChartJS } from 'chart.js/auto';
+import Chart from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 
-function Chart() {
+function PieChart() {
   // DEFINE DARKMODE FROM APP.JS
   const DarkMode = useContext(DarkModeContext);
   const [cards, setCards] = useState([]);
@@ -55,6 +57,44 @@ function Chart() {
     }
   }
 
+
+  // PIE CHART
+  const labels = ['Shopping', 'Transportation', 'Groceries', 'Utilities', 'Health', 'Others']
+  const dataSet = Object.values(cards);
+  const options = {
+    plugins: {
+      legend: {
+        labels: {
+          color: DarkMode ? "white" : "black",
+        },
+      },
+    },
+  };
+  console.log(DarkMode)
+  const data = {
+    labels: labels,
+    datasets: [{
+      label:"Categories",
+      data: dataSet,
+      backgroundColor: [
+        'rgba(255, 0, 0, 0.8)',
+        'rgba(255, 165, 0, 0.8)',
+        'rgba(255, 255, 0, 0.8)',
+        'rgba(0, 128, 0, 0.8)',
+        'rgba(0, 0, 255, 0.8)',
+        'rgba(75, 0, 130, 0.8)'
+    ],
+    borderColor: [
+      'rgba(255, 0, 0, 0.8)',
+      'rgba(255, 165, 0, 0.8)',
+      'rgba(255, 255, 0, 0.8)',
+      'rgba(0, 128, 0, 0.8)',
+      'rgba(0, 0, 255, 0.8)',
+      'rgba(75, 0, 130, 0.8)'
+  ],
+      hoverOffset: 4
+    }]
+  }
   if (error) {
     return <div>{error}</div>;
   }
@@ -68,10 +108,13 @@ function Chart() {
         <div className="d-flex justify-content-center ">
           <h1 className='cards-header'>Welcome to Tracker 1</h1>
         </div>
+        <div>
+        <Pie data={data} options={options}/>
+        </div>
         <Footer />
       </div>
     </>
   )
 }
 
-export default Chart
+export default PieChart

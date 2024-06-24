@@ -12,7 +12,7 @@ import { createContext } from 'react';
 import {Toggle} from './components/Toggle';
 import './App.css'
 import './Styling/Cards.css'
-import Chart from './components/Chart';
+import PieChart from './components/Chart';
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 export const DarkModeContext = createContext();
@@ -27,10 +27,23 @@ const App = () => {
       />
       <Router>
         <Routes>
-          <Route path="/" element={<Chart />}/>
-          <Route path="/cards" element={<Cards />}/>
-          <Route path="/cards/:id" element={<Card />}/>
-          <Route path="/cards/new" element={<NewCard />}/>
+          <Route path="/" element={
+            <DarkModeContext.Provider value={isDark}>
+              <PieChart isDark={isDark}/>
+            </DarkModeContext.Provider>
+            }/>
+          <Route path="/cards" element={
+            <DarkModeContext.Provider value={isDark}>
+              <Cards isDark={isDark}/>
+            </DarkModeContext.Provider>}/>
+          <Route path="/cards/:id" element={
+            <DarkModeContext.Provider value={isDark}>
+              <Card isDark={isDark}/>
+            </DarkModeContext.Provider>}/>
+          <Route path="/cards/new" element={
+            <DarkModeContext.Provider value={isDark}>
+              <NewCard isDark={isDark}/>
+            </DarkModeContext.Provider>}/>
         </Routes>
     </Router>
   </div>
