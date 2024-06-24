@@ -8,14 +8,16 @@ import '../Styling/Cards.css';
 import axios from 'axios';
 // import { Chart as ChartJS } from 'chart.js/auto';
 import Chart from 'chart.js/auto';
-import { Pie } from 'react-chartjs-2';
+import { Pie, Bar } from 'react-chartjs-2';
 
 function PieChart() {
   // DEFINE DARKMODE FROM APP.JS
   const DarkMode = useContext(DarkModeContext);
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
+  const [cardsByMonth, setCardsByMonth] = useState([]);
 
+  // SORT DATA BY MONTH (CURRENT MONTH)
   const sortedByMonth = (data) => {
     return data.filter( item => {
       const today = new Date();
@@ -25,6 +27,7 @@ function PieChart() {
     )
   }
 
+  // SORT DATA BY MONTH THEN BY CATEGORY IN THAT MONTH
   const groupCardsByCategory = (cards) => {
     return cards.reduce((grouped, card) => {
       const category = card.category;
@@ -36,6 +39,22 @@ function PieChart() {
     }, {});
   };
 
+  const groupCardsByMonth = (cards) => {
+    return cards.reduce((grouped, card) => {
+      const date = new Date(card.date);
+      const month = date.getMonth();
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September', 'October', 'November', 'December'
+      ];
+      const monthName = monthNames[month];
+      if (!grouped[monthName]) {
+        grouped[monthName] = 0;
+      }
+      grouped[monthName] += card.amount;
+      return grouped;
+    }, {})
+  }
+
+  // FETCH DATA
   useEffect(() => {
     sortCards();
   }, []);
@@ -46,9 +65,9 @@ function PieChart() {
       const response = await axios.get("http://localhost:3000/api/v1/cards");
 
       const sortedMonth = sortedByMonth(response.data);
-
+      const groupedCardsByMonth = groupCardsByMonth(response.data);
+      setCardsByMonth(groupedCardsByMonth);
       const groupByCategory = groupCardsByCategory(sortedMonth);
-      console.log(groupByCategory);
       setCards(groupByCategory);
     }
     catch (error) {
@@ -58,23 +77,35 @@ function PieChart() {
   }
 
 
-  // PIE CHART
-  const labels = ['Shopping', 'Transportation', 'Groceries', 'Utilities', 'Health', 'Others']
+  // PIE CHART(LABEL OF CATEGORIES AND COLOR)
+  const labels = Object.keys(cards)
   const dataSet = Object.values(cards);
   const options = {
     plugins: {
+      title: {
+        display: true,
+        text: 'SPENDING BY CATEGORIES',
+        color: 'grey',
+        font: {
+            weight: 'bold',
+            size: 20
+        }
+    },
       legend: {
+        position: 'bottom',
         labels: {
-          color: DarkMode ? "white" : "black",
+          color: DarkMode ? "rgb(255,255,255,0.5)" : "rbga(255,255,255,0.5)",
         },
       },
     },
   };
-  console.log(DarkMode)
+
+
+  // SET DATA OF PIE CHART
   const data = {
     labels: labels,
     datasets: [{
-      label:"Categories",
+      label:"Amount",
       data: dataSet,
       backgroundColor: [
         'rgba(255, 0, 0, 0.8)',
@@ -95,6 +126,32 @@ function PieChart() {
       hoverOffset: 4
     }]
   }
+
+  // BAR CHART SET-UP
+  const labelsBarChart = Object.keys(cardsByMonth);
+  const dataSetBarChart = Object.values(cardsByMonth);
+  const optionsBar = {
+    plugins: {
+      title: {
+        display: true,
+        text: 'MONTHLY SPENDING',
+        color: 'grey',
+        font: {
+            weight: 'bold',
+            size: 20
+        }
+    }
+    },
+  };
+  const dataBarChart = {
+    labels: labelsBarChart,
+    datasets: [{
+      label:"AUD",
+      data: dataSetBarChart,
+      hoverOffset: 4
+    }]
+  }
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -105,11 +162,13 @@ function PieChart() {
   return (
     <>
       <div className='container-3' data-theme={ DarkMode ? "dark" : ""}>
-        <div className="d-flex justify-content-center ">
-          <h1 className='cards-header'>Welcome to Tracker 1</h1>
-        </div>
         <div>
-        <Pie data={data} options={options}/>
+          <div className="mt-3">
+            <Pie data={data} options={options}/>
+          </div>
+          <div className="mt-3">
+            <Bar data={dataBarChart} options={optionsBar}/>
+          </div>
         </div>
         <Footer />
       </div>
