@@ -10,16 +10,23 @@ import '../Styling/Cards.css';
 // import {Toggle} from './Toggle';
 import '../Styling/Toggle.css'
 import { DarkModeContext } from '../App';
+import {returnIcon} from './returnIcon';
+import Modal from 'react-modal';
+import SearchForm from './SearchForm';
 
 
 const API_URL = "http://localhost:3000/api/v1/cards";
 
-
+Modal.setAppElement('#root');
 const Cards = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const isDark = useContext(DarkModeContext);
   const today = new Date();
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
+  const [rawData, setRawData] = useState();
+  const [filteredTransactions, setFilteredTransactions] = useState();
+
 
   // CALCULATE THE DIFFERENCE IN DAYS
   const getDifferenceInDays = (date1, date2) => {
@@ -64,11 +71,12 @@ const Cards = () => {
     try {
       const response = await axios.get(API_URL);
       const data = response.data;
+      setRawData(data);
 
-      // Sort cards by date
+      // SORT CARDS BY DATE
       const sortedCards = sortCardsByDate(data);
 
-      // Group cards by date
+      // GROUP CARDS BY DATE
       const grouped = groupCardsByDate(sortedCards);
       setCards(grouped);
     } catch (error) {
@@ -77,25 +85,33 @@ const Cards = () => {
     }
   };
 
-  // FUNCTION TO RETURN ICONS
-  const returnIcon = (category) => {
-    switch (category) {
-      case 'shopping':
-        return <i className="fa-solid fa-bag-shopping"></i>;
-      case 'transportation':
-        return <i className="fa-solid fa-car"></i>;
-      case 'groceries':
-        return <i className="fa-solid fa-drumstick-bite"></i>;
-      case 'utilities':
-        return <i className="fa-solid fa-bolt"></i>;
-      case 'health':
-        return <i className="fa-solid fa-heart-pulse"></i>;
-      case 'entertainment':
-        return <i className="fa-solid fa-gamepad"></i>;
-      default:
-        return <i className="fa-regular fa-circle"></i>;
-    }
+  // OPEN MODAL
+  const openModal = () => {
+    setModalIsOpen(true);
   };
+
+  // CLOSE MODAL
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+
+  const filterTransactions = (items, criteria) => {
+    return items.filter(item =>
+      item.category === criteria.category &&
+      item.description.toLowerCase().includes(criteria.description.toLowerCase())
+    );
+  };
+
+
+  const handleSearch = (criteria) => {
+    const filtered = filterTransactions(rawData, criteria);
+    console.log(filtered);
+    setFilteredTransactions(filtered);
+    console.log(filteredTransactions)
+  };
+
+
   // PUT DIFFERENCE BACKGROUND COLOR OF DIV
   const handleBackground = (index) => {
     if (index % 2 === 0) {
@@ -122,7 +138,8 @@ const Cards = () => {
             {cards[date].map((card, index) => (
               <div key={card.id} className={`${handleBackground(index)} cards-card-info-without-date`}>
                 <div className='d-flex'>
-                <p className='no-mb icons-left'>{returnIcon(card.category)}</p>
+                <Link className=' no-mb icons-left' to={`/cards/${card.id}`}>{returnIcon(card.category)}</Link>
+                {/* <p className='no-mb icons-left'>{returnIcon(card.category)}</p> */}
                 <p className='no-mb cards-card-description'>{card.description} </p>
                 </div>
                 <Link className='no-underline' to={`/cards/${card.id}`}>{card.amount} AUD</Link>
@@ -130,6 +147,18 @@ const Cards = () => {
             ))}
           </div>
         ))}
+          {/* MODAL */}
+          <button className='search-btn' onClick={openModal}><i className="fa-solid fa-magnifying-glass"></i></button>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Example Modal"
+          >
+            <h2>Find transactions</h2>
+            <SearchForm onSearch={handleSearch} />
+            <button onClick={closeModal}>Close</button>
+          </Modal>
+
       <Footer />
     </div>
   );

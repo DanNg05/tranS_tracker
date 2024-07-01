@@ -11,11 +11,12 @@
 .container-1 {
   background-color: var(--page-background-color);
   position: relative;
-  /* height: 100vh; */
+  height: calc(100dvh - 60px);
   padding-top: 40px;
   transition: background-color 250ms ease-in-out;
+  overflow: scroll;
 }
-.container-3 {
+.container-3  {
   background-color: var(--page-background-color);
   padding-top: 40px;
   height: 100vh;
@@ -83,4 +84,19 @@
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #b0bde0;
   --toggle-fg: #4a521e;
+}
+
+.search-btn-sticky {
+  position: relative;
+}
+
+.search-btn {
+  padding: 20px;
+  background-color: rgba(144, 106, 106, 0.532);
+  color: var(--color);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 70px;
+  right: 30px;
+  border: 1px solid white;
 }

@@ -5,14 +5,18 @@ import {useState, useEffect} from 'react';
 import { format } from 'date-fns';
 import Footer from './Footer';
 import '../Styling/Styling.css'
+import {returnIcon} from './returnIcon';
+import '../Styling/Card.css'
+
+
 
 
 const Card = () => {
-
   const { id } = useParams();
   const [card, setCard] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
 
   // FETCH TO GET DATA OF CARD WITH RELATED ID
   useEffect (() => {
@@ -39,6 +43,10 @@ const Card = () => {
   }
 
 
+
+
+
+
   // CHECK FOR ERROR AND THE AVAILABILITY OF DATA
   if (error) {
     return <div>{error}</div>;
@@ -49,12 +57,19 @@ const Card = () => {
   }
   return (
     <>
-      <div>
-        <p>{card.category}</p>
-        <p>{format(card.date, 'EEE dd MMM yyyy')}</p>
-        <p>{card.amount} AUD</p>
-        <p>{card.description}</p>
-        <button onClick={handleDelete}>Delete transaction</button>
+      <div className='container-3'>
+        <div className="padding-top">
+          <p className='card-center-p'>{returnIcon(card.category)}</p>
+          <p className='card-center-p'>Category: {card.category.toUpperCase()}</p>
+          <p className='card-center-p'>Date: {format(card.date, 'EEE dd MMM yyyy')}</p>
+          <p className='card-center-p'>Amount :{card.amount} AUD</p>
+          <p className='card-center-p'>Description: {card.description}</p>
+          <div className="d-flex justify-content-center">
+            <button className='card-delete-btn' onClick={handleDelete}>DELETE TRANSACTION</button>
+          </div>
+        </div>
+
+
       </div>
       <Footer />
     </>
