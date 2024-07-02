@@ -1,0 +1,33 @@
+.search-form {
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.description-input {
+  width: calc(100vw - 100px);
+  margin-bottom: 10px;
+}
+
+.search-label {
+  margin-left: 17px;
+}
+
+.search-category-input {
+  margin-right: 19px;
+}
+
+.search-form-btn {
+  background-color: maroon;
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 25px;
+  width: 130px;
+  box-shadow: 2px 2px grey;
+}

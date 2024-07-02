@@ -14,6 +14,7 @@ import './App.css'
 import './Styling/Cards.css'
 import PieChart from './components/Chart';
 import { useLocalStorage } from "@uidotdev/usehooks";
+import Search from './components/Search';
 
 export const DarkModeContext = createContext();
 
@@ -44,6 +45,11 @@ const App = () => {
             <DarkModeContext.Provider value={isDark}>
               <NewCard isDark={isDark}/>
             </DarkModeContext.Provider>}/>
+          <Route path="/cards/search" element={
+            <DarkModeContext.Provider value={isDark}>
+              <Search isDark={isDark}/>
+            </DarkModeContext.Provider>
+          }/>
         </Routes>
     </Router>
   </div>

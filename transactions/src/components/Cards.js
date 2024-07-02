@@ -11,54 +11,15 @@ import '../Styling/Cards.css';
 import '../Styling/Toggle.css'
 import { DarkModeContext } from '../App';
 import {returnIcon} from './returnIcon';
-import Modal from 'react-modal';
-import SearchForm from './SearchForm';
-
+import {isToday, sortCardsByDate, groupCardsByDate, getDifferenceInDays, handleBackground } from './Date';
 
 const API_URL = "http://localhost:3000/api/v1/cards";
 
-Modal.setAppElement('#root');
 const Cards = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const isDark = useContext(DarkModeContext);
   const today = new Date();
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
-  const [rawData, setRawData] = useState();
-  const [filteredTransactions, setFilteredTransactions] = useState();
-
-
-  // CALCULATE THE DIFFERENCE IN DAYS
-  const getDifferenceInDays = (date1, date2) => {
-    const diffTime = Math.abs(date2 - date1);
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  };
-
-
-  // CHECK TODAY
-  const isToday = (someDate) => {
-    const today = new Date();
-    return someDate.getDate() === today.getDate() &&
-            someDate.getMonth() === today.getMonth() &&
-            someDate.getFullYear() === today.getFullYear();
-  };
-
-  // SORT DATA BY DATE
-  const sortCardsByDate = (cards) => {
-    return cards.sort((a, b) => new Date(b.date) - new Date(a.date));
-  };
-
-  // // GROUP BY DATE
-  const groupCardsByDate = (cards) => {
-    return cards.reduce((grouped, card) => {
-      const date = card.date;
-      if (!grouped[date]) {
-        grouped[date] = [];
-      }
-      grouped[date].push(card);
-      return grouped;
-    }, {});
-  };
 
 
   // FETCH DATA FROM API
@@ -71,7 +32,6 @@ const Cards = () => {
     try {
       const response = await axios.get(API_URL);
       const data = response.data;
-      setRawData(data);
 
       // SORT CARDS BY DATE
       const sortedCards = sortCardsByDate(data);
@@ -85,40 +45,6 @@ const Cards = () => {
     }
   };
 
-  // OPEN MODAL
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  // CLOSE MODAL
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
-
-  const filterTransactions = (items, criteria) => {
-    return items.filter(item =>
-      item.category === criteria.category &&
-      item.description.toLowerCase().includes(criteria.description.toLowerCase())
-    );
-  };
-
-
-  const handleSearch = (criteria) => {
-    const filtered = filterTransactions(rawData, criteria);
-    console.log(filtered);
-    setFilteredTransactions(filtered);
-    console.log(filteredTransactions)
-  };
-
-
-  // PUT DIFFERENCE BACKGROUND COLOR OF DIV
-  const handleBackground = (index) => {
-    if (index % 2 === 0) {
-      return `grey-bg`
-    }
-      return `darker-bg`
-  }
   // CHECK FOR ERROR AND THE AVAILABILITY OF DATA
   if (error) {
     return <div>{error}</div>;
@@ -147,18 +73,9 @@ const Cards = () => {
             ))}
           </div>
         ))}
-          {/* MODAL */}
-          <button className='search-btn' onClick={openModal}><i className="fa-solid fa-magnifying-glass"></i></button>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            contentLabel="Example Modal"
-          >
-            <h2>Find transactions</h2>
-            <SearchForm onSearch={handleSearch} />
-            <button onClick={closeModal}>Close</button>
-          </Modal>
-
+        <div>
+          <Link to={`/cards/search`}><i class="fa-solid fa-magnifying-glass search-btn"></i></Link>
+        </div>
       <Footer />
     </div>
   );
