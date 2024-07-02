@@ -92,7 +92,7 @@
 
 .search-btn {
   padding: 20px;
-  background-color: rgba(144, 106, 106, 0.532);
+  background-color: rgba(144, 106, 106, 0.81);
   color: var(--color);
   border-radius: 50%;
   position: fixed;
