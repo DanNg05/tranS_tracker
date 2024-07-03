@@ -6,14 +6,15 @@ import {isToday, sortCardsByDate, groupCardsByDate, getDifferenceInDays, handleB
 import { returnIcon } from './returnIcon';
 import {Link} from 'react-router-dom';
 import Footer from './Footer';
-import '../Styling/newCard.css'
+import '../Styling/newCard.css';
+import AnimatedPage from './AnimatedPage';
 
 const Search = () => {
   const today = new Date();
   const [rawData, setRawData] = useState();
   const [error, setError] = useState(null);
   const [cards, setCards] = useState([]);
-
+  const [transactions, setTransactions] = useState([]);
   // FETCH DATA FROM API
   const fetchAPI = async () => {
     try {
@@ -57,6 +58,8 @@ const Search = () => {
     const filtered = filterTransactions(rawData, criteria);
     // SORT DATA BY DATE
     const sortedCards = sortCardsByDate(filtered);
+    // SET TRANSACTIONS TO DISPLAY HOW MANY TRANSACTIONS IN SEARCH
+    setTransactions(sortedCards);
     // GROUP DATA BY DATE
     const grouped = groupCardsByDate(sortedCards);
     setCards(grouped);
@@ -66,31 +69,42 @@ const Search = () => {
     return <div>{error}</div>;
   }
   return (
-    <div className='container-3 pt-5'>
-      <h3 className='cards-header' style={{textAlign: "center"}}>Find transactions</h3>
-      <SearchForm onSearch={handleSearch} />
-      <div className="d-flex justify-content-center ">
-        { Object.keys(cards).length > 0 ?
-        <h2 className='form-label'>{Object.keys(cards).length} transactions found</h2>
-        : <p></p> }
-        </div>
-        {Object.keys(cards).map(date => (
-          <div key={date} className='cards-card-info-with-date'>
-            { isToday(new Date(date)) ? <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
-            {cards[date].map((card, index) => (
-              <div key={card.id} className={`${handleBackground(index)} cards-card-info-without-date`}>
-                <div className='d-flex'>
-                <Link className=' no-mb icons-left' to={`/cards/${card.id}`}>{returnIcon(card.category)}</Link>
-                {/* <p className='no-mb icons-left'>{returnIcon(card.category)}</p> */}
-                <p className='no-mb cards-card-description'>{card.description} </p>
-                </div>
-                <Link className='no-underline' to={`/cards/${card.id}`}>{card.amount} AUD</Link>
-              </div>
-            ))}
+    <>
+    <AnimatedPage>
+      <div className='container-3 pt-5'>
+        <h3 className='cards-header' style={{textAlign: "center"}}>Find transactions</h3>
+        <SearchForm onSearch={handleSearch} />
+        <div className="d-flex justify-content-center ">
+          { transactions.length > 0 ?
+          <h2 className='form-label'>{transactions.length} transactions found</h2>
+          : <p></p> }
+
           </div>
-        ))}
-        <Footer />
-    </div>
+          {Object.keys(cards).map(date => (
+            <div key={date} className='cards-card-info-with-date'>
+              { isToday(new Date(date)) ?
+              <strong className='cards-date'>
+                {format(date, 'EEE dd MMM yyyy')}
+                <span className='right-of-date'>Today</span></strong>
+              : <strong className='cards-date'>
+                {format(date, 'EEE dd MMM yyyy')}
+                <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>}
+              {cards[date].map((card, index) => (
+                <div key={card.id} className={`${handleBackground(index)} cards-card-info-without-date`}>
+                  <div className='d-flex'>
+                  <Link className=' no-mb icons-left' to={`/cards/${card.id}`}>{returnIcon(card.category)}</Link>
+                  {/* <p className='no-mb icons-left'>{returnIcon(card.category)}</p> */}
+                  <p className='no-mb cards-card-description'>{card.description} </p>
+                  </div>
+                  <Link className='no-underline' to={`/cards/${card.id}`}>{card.amount} AUD</Link>
+                </div>
+              ))}
+            </div>
+          ))}
+      </div>
+    </AnimatedPage>
+    <Footer />
+    </>
   )
 }
 
