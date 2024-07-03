@@ -7,10 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'faker'
 
-Card.create(category: "shopping", amount: 220, date: Date.new(2024,6,1), description: "New ASOS")
-Card.create(category: "transportation", amount: 100, date: Date.new(2024,6,3), description: "Lexus")
-Card.create(category: "groceries", amount: 55, date: Date.new(2024,6,3), description: "Coles Norwood")
-Card.create(category: "utilities", amount: 100, date: Date.new(2024,6,2), description: "Electricity")
-Card.create(category: "health", amount: 30, date: Date.new(2024,6,4), description: "chemist")
-Card.create(category: "others", amount: 10, date: Date.new(2024,6,4), description: "candles")
+categories = ['shopping', 'transportation', 'groceries', 'utilities', 'health', 'others']
+Card.destroy_all
+15.times do |index|
+  Card.create(category: categories.sample, amount: rand(1..200), date: Faker::Date.between(from: 1.month.ago, to: Date.today), description: Faker::Name.name )
+  puts "finish #{index + 1}"
+end
