@@ -40,5 +40,5 @@ Feature
 Contributions are welcome! Fork the repository and submit a pull request.
 
 
-For questions or support, don't hesitate to get in touch with me at https://www.linkedin.com/in/dan-nguyen-6909a6190/details/projects/.
+For questions or support, don't hesitate to get in touch with me at https://www.linkedin.com/in/dan-nguyen-6909a6190/.
 
