@@ -15,7 +15,7 @@ cd tranS_tracker
 
 Install dependencies using npm or yarn:
 npm install
-# or
+or
 yarn install
 
 **Usage**
