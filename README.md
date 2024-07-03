@@ -29,7 +29,7 @@ Feature
 - Generate summaries with the pie chart for a month and the bar chart for months
 - Responsive design for mobile devices
 
-  Technologies Used
+Technologies Used
 - Ruby on Rails for the API backend
 - PostgreSQL
 - Axios for API requests
