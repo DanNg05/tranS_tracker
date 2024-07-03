@@ -6,7 +6,7 @@ Track your financial transactions securely with our mobile app. This app integra
 Installation
 To get started with the Transactions Tracker Mobile App, follow these steps:
 
-* Clone the repository:
+Clone the repository:
 git clone git@github.com:DanNg05/tranS_tracker.git
 
 
@@ -18,7 +18,7 @@ npm install
 or
 yarn install
 
-* Usage
+Usage
 run the local server:
 - in tranS_tracker directory: rails s
 - cd transactions: npm run start (run React server to update any changes)
@@ -36,9 +36,9 @@ Feature
 - Bootstrap for styling
 - React with hooks for routes, page transitions
 
-* Contributing
+Contributing
 Contributions are welcome! Fork the repository and submit a pull request.
 
-* Contact
+Contact
 For questions or support, don't hesitate to get in touch with me at https://www.linkedin.com/in/dan-nguyen-6909a6190/details/projects/.
 
