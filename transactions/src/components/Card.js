@@ -7,7 +7,7 @@ import Footer from './Footer';
 import '../Styling/Styling.css'
 import {returnIcon} from './returnIcon';
 import '../Styling/Card.css'
-
+import AnimatedPage from './AnimatedPage';
 
 
 
@@ -56,7 +56,7 @@ const Card = () => {
     return <div>Loading...</div>;
   }
   return (
-    <>
+    <AnimatedPage>
       <div className='container-3'>
         <div className="padding-top">
           <p className='card-center-p'>{returnIcon(card.category)}</p>
@@ -72,7 +72,7 @@ const Card = () => {
 
       </div>
       <Footer />
-    </>
+    </AnimatedPage>
   )
 }
 

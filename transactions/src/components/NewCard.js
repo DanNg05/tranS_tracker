@@ -5,8 +5,11 @@ import Footer from './Footer';
 import '../Styling/Styling.css'
 import '../Styling/newCard.css'
 import { DarkModeContext } from '../App';
+import AnimatedPage from './AnimatedPage';
 
 const NewCard = () => {
+
+    // USE DARKMODE FROM CONTEXT
     const isDark = useContext(DarkModeContext);
     // SET UP CARD WITH EMPTY VALUES
     const [card, setCard] = useState({
@@ -53,6 +56,7 @@ const NewCard = () => {
 
     return (
       <>
+      <AnimatedPage>
         <div className='container-3' data-theme={isDark ? "dark" : ""}>
           <div className="d-flex justify-content-center mt-5">
             <h1 className='cards-header'>NEW TRANSACTION HERE</h1>
@@ -113,7 +117,8 @@ const NewCard = () => {
               <button type="submit" className='form-btn'>ADD NEW TRANSACTION</button>
           </form>
         </div>
-        <Footer />
+      </AnimatedPage>
+      <Footer />
       </>
     );
 };

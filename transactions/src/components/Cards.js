@@ -12,6 +12,8 @@ import '../Styling/Toggle.css'
 import { DarkModeContext } from '../App';
 import {returnIcon} from './returnIcon';
 import {isToday, sortCardsByDate, groupCardsByDate, getDifferenceInDays, handleBackground } from './Date';
+import AnimatedPage from './AnimatedPage';
+
 
 const API_URL = "http://localhost:3000/api/v1/cards";
 
@@ -54,13 +56,17 @@ const Cards = () => {
     return <div>Loading...</div>;
   }
   return (
+    <>
+    <AnimatedPage>
       <div className='container-1' data-theme={ isDark ? "dark" : ""}>
         <div className="d-flex justify-content-center ">
           <h2 className='cards-header'>Your transactions</h2>
         </div>
         {Object.keys(cards).map(date => (
           <div key={date} className='cards-card-info-with-date'>
-            { isToday(new Date(date)) ? <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
+            { isToday(new Date(date)) ?
+            <strong className='cards-date'>
+              {format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>Today</span></strong> : <strong className='cards-date'>{format(date, 'EEE dd MMM yyyy')} <span className='right-of-date'>{getDifferenceInDays(today, new Date(date))} days ago</span></strong>  }
             {cards[date].map((card, index) => (
               <div key={card.id} className={`${handleBackground(index)} cards-card-info-without-date`}>
                 <div className='d-flex'>
@@ -74,10 +80,12 @@ const Cards = () => {
           </div>
         ))}
         <div>
-          <Link to={`/cards/search`}><i class="fa-solid fa-magnifying-glass search-btn"></i></Link>
+          <Link to={`/cards/search`}><i className="fa-solid fa-magnifying-glass search-btn"></i></Link>
         </div>
-      <Footer />
-    </div>
+      </div>
+    </AnimatedPage>
+    <Footer />
+    </>
   );
 };
 

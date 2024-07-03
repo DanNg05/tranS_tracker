@@ -9,6 +9,7 @@ import axios from 'axios';
 // import { Chart as ChartJS } from 'chart.js/auto';
 import Chart from 'chart.js/auto';
 import { Pie, Bar } from 'react-chartjs-2';
+import AnimatedPage from './AnimatedPage';
 
 function PieChart() {
   // DEFINE DARKMODE FROM APP.JS
@@ -39,6 +40,8 @@ function PieChart() {
     }, {});
   };
 
+
+  // GROUP CARDS BY MONTH
   const groupCardsByMonth = (cards) => {
     return cards.reduce((grouped, card) => {
       const date = new Date(card.date);
@@ -143,6 +146,8 @@ function PieChart() {
     }
     },
   };
+
+  // SET DATA FOR BAR CHART
   const dataBarChart = {
     labels: labelsBarChart,
     datasets: [{
@@ -161,6 +166,7 @@ function PieChart() {
   }
   return (
     <>
+    <AnimatedPage>
       <div className='container-3' data-theme={ DarkMode ? "dark" : ""}>
         <div>
           <div className="mt-3">
@@ -170,8 +176,9 @@ function PieChart() {
             <Bar data={dataBarChart} options={optionsBar}/>
           </div>
         </div>
-        <Footer />
       </div>
+    </AnimatedPage>
+    <Footer />
     </>
   )
 }
