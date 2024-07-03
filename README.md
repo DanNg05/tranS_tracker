@@ -36,9 +36,9 @@ run the local server:
 - React with hooks for routes, page transitions
 
 
-*Contributing*
+
 Contributions are welcome! Fork the repository and submit a pull request.
 
-*Contact*
+
 For questions or support, don't hesitate to get in touch with me at https://www.linkedin.com/in/dan-nguyen-6909a6190/.
 
